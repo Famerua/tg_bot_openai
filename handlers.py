@@ -42,7 +42,8 @@ async def generate_text(msg: Message, state: FSMContext):
     res = await utils.generate_text(prompt)
     if not res:
         return await mesg.edit_text(text.gen_error, reply_markup=kb.iexit_kb)
-    await mesg.edit_text(res[0] + text.text_watermark, disable_web_page_preview=True)
+    # await mesg.edit_text(res[0] + text.text_watermark, disable_web_page_preview=True)
+    await mesg.edit_text(res[0], disable_web_page_preview=True)
 
 
 @router.callback_query(F.data == "generate_image")
@@ -61,4 +62,5 @@ async def generate_image(msg: Message, state: FSMContext):
     if len(img_res) == 0:
         return await mesg.edit_text(text.gen_error, reply_markup=kb.iexit_kb)
     await mesg.delete()
-    await mesg.answer_photo(photo=img_res[0], caption=text.img_watermark)
+    # await mesg.answer_photo(photo=img_res[0], caption=text.img_watermark)
+    await mesg.answer_photo(photo=img_res[0])
